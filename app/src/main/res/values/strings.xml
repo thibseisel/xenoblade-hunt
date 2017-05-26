@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Xenoblade Chronicles</string>
+    <string name="area_colony_9">Colony 9</string>
+    <string name="area_tephra_cave">Tephra Cave</string>
+    <string name="area_bionis_leg">Bionis\' Leg</string>
+    <string name="area_colony_6">Colony 6</string>
+    <string name="area_satorl_marsh">Satorl Marsh</string>
+    <string name="area_bionis_interior">Bionis Interior</string>
+    <string name="area_makna_forest">Makna Forest</string>
+    <string name="area_eryth_sea">Eryth Sea</string>
+    <string name="area_alcamoth">Alcamoth</string>
+    <string name="area_high_entia_tomb">High Entia Tomb</string>
+    <string name="area_valak_mountain">Valak Mountain</string>
+    <string name="area_sword_valley">Sword Valley</string>
+    <string name="area_galahad_fortress">Galahad Fortress</string>
+    <string name="area_fallen_arm">Fallen Arm</string>
+    <string name="area_mechonis_field">Mechonis Field</string>
+    <string name="area_central_factory">Central Factory</string>
+    <string name="area_agniratha">Agniratha</string>
+    <string name="area_prison_island">Prison Island</string>
+    <string name="area_none">No area</string>
+    <string name="desc_mark_defeated">Mark as defeated</string>
+
+</resources>

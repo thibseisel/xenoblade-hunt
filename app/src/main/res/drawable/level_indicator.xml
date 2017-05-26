@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:minLevel="5">
+        <shape android:shape="oval">
+            <solid android:color="@color/md_red_500"/>
+        </shape>
+    </item>
+    <item android:minLevel="4">
+        <shape android:shape="oval">
+            <solid android:color="@color/md_amber_500"/>
+        </shape>
+    </item>
+    <item android:minLevel="3">
+        <shape android:shape="oval">
+            <solid android:color="@color/md_amber_500"/>
+        </shape>
+    </item>
+    <item android:minLevel="2">
+        <shape android:shape="oval">
+            <solid android:color="@color/md_grey_200"/>
+        </shape>
+    </item>
+    <item android:minLevel="1">
+        <shape android:shape="oval">
+            <solid android:color="@color/md_black"/>
+        </shape>
+    </item>
+    <item android:minLevel="0">
+        <shape android:shape="oval">
+            <solid android:color="@color/md_green_500"/>
+        </shape>
+    </item>
+</level-list>

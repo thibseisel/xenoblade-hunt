@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Xenoblade Chronicles</string>
+    <string name="area_agniratha">Agniratha</string>
+    <string name="area_alcamoth">Alcamoth</string>
+    <string name="area_bionis_interior">Intérieur de Bionis</string>
+    <string name="area_bionis_leg">Jambe de Bionis</string>
+    <string name="area_central_factory">Usine Principale</string>
+    <string name="area_colony_6">Colonie 6</string>
+    <string name="area_colony_9">Colonie 9</string>
+    <string name="area_eryth_sea">Mer d\'Eryth</string>
+    <string name="area_fallen_arm">Gras Gisant</string>
+    <string name="area_galahad_fortress">Forteresse Galahad</string>
+    <string name="area_high_entia_tomb">Nécropole Hayenthe</string>
+    <string name="area_makna_forest">Jungle de Makna</string>
+    <string name="area_mechonis_field">Intérieur de Mechonis</string>
+    <string name="area_none">Aucune zone</string>
+    <string name="area_prison_island">Ile Prison</string>
+    <string name="area_satorl_marsh">Marais Satorl</string>
+    <string name="area_sword_valley">Vallée de l\'Epée</string>
+    <string name="area_tephra_cave">Grottes de Tephra</string>
+    <string name="area_valak_mountain">Pic de Valak</string>
+    <string name="desc_mark_defeated">Marquer comme vaincu</string>
+</resources>
