@@ -1,4 +1,4 @@
-package fr.nihilus.xenobladechronicles.monsters;
+package fr.nihilus.xenobladechronicles.monsters.list;
 
 import android.content.Context;
 import android.support.annotation.IntRange;
@@ -11,22 +11,23 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 import fr.nihilus.xenobladechronicles.R;
+import fr.nihilus.xenobladechronicles.model.Monster;
 
 class MonsterAdapter extends Adapter<MonsterAdapter.Holder> {
 
-    private final Context mContext;
+    private final MonsterActionListener mListener;
     private int mPlayerLevel;
-    private MonsterActionListener mListener;
     private Monster[] mData = new Monster[0];
+    private Comparator<Monster> mSortingRule = Monster.comparator(Monster.ORDERING_NAME);
 
-    MonsterAdapter(@NonNull Context ctx, @IntRange(from = 1, to = 99) int playerLevel) {
-        if (playerLevel < 1 || playerLevel > 99) {
-            throw new IllegalArgumentException("Player level must be in 1..99");
-        }
-
-        mPlayerLevel = playerLevel;
-        mContext = ctx;
+    MonsterAdapter(@IntRange(from = 1, to = 99) int playerLevel,
+                   MonsterActionListener listener) {
+        setPlayerLevel(playerLevel);
+        mListener = listener;
     }
 
     @Override
@@ -38,12 +39,14 @@ class MonsterAdapter extends Adapter<MonsterAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(final Holder holder, int position) {
+        Context ctx = holder.itemView.getContext();
         Monster monster = mData[position];
-        holder.levelIndicator.setText(monster.getLevel());
+
+        holder.levelIndicator.setText(String.valueOf(monster.getLevel()));
         holder.levelIndicator.getBackground().setLevel(monster.getDangerLevel(mPlayerLevel));
 
         holder.name.setText(monster.getName());
-        holder.location.setText(monster.getArea().getName(mContext));
+        holder.location.setText(monster.getArea().getName(ctx));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,19 +75,30 @@ class MonsterAdapter extends Adapter<MonsterAdapter.Holder> {
         return mData.length;
     }
 
-    void setActionListener(MonsterActionListener listener) {
-        mListener = listener;
+    void setPlayerLevel(@IntRange(from = 1, to = 99) int playerLevel) {
+        if (playerLevel < 1 || playerLevel > 99) {
+            throw new IllegalArgumentException("Player level must be in 1..99");
+        }
+
+        mPlayerLevel = playerLevel;
     }
 
-    void setMonsters(Monster[] data) {
-        mData = data;
+    void setSorting(@Monster.Ordering int orderStategy) {
+        mSortingRule = Monster.comparator(orderStategy);
+        Arrays.sort(mData, mSortingRule);
+        notifyDataSetChanged();
+    }
+
+    void setMonsters(@NonNull Monster[] data) {
+        mData = new Monster[data.length];
+        System.arraycopy(data, 0, mData, 0, data.length);
+        Arrays.sort(mData, mSortingRule);
         notifyDataSetChanged();
     }
 
     interface MonsterActionListener {
-        void onMonsterSelected(Monster monster);
-
-        void onMonsterDefeated(Monster monster);
+        void onMonsterSelected(@NonNull Monster monster);
+        void onMonsterDefeated(@NonNull Monster monster);
     }
 
     static class Holder extends RecyclerView.ViewHolder {

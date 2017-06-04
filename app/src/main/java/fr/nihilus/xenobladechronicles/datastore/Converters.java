@@ -2,9 +2,8 @@ package fr.nihilus.xenobladechronicles.datastore;
 
 import android.arch.persistence.room.TypeConverter;
 
-import fr.nihilus.xenobladechronicles.monsters.Area;
+import fr.nihilus.xenobladechronicles.model.Area;
 
-@SuppressWarnings("WeakerAccess")
 class Converters {
 
     @TypeConverter

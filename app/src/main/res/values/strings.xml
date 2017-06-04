@@ -18,7 +18,22 @@
     <string name="area_central_factory">Central Factory</string>
     <string name="area_agniratha">Agniratha</string>
     <string name="area_prison_island">Prison Island</string>
-    <string name="area_none">No area</string>
     <string name="desc_mark_defeated">Mark as defeated</string>
+    <string name="desc_earth">Earth</string>
+    <string name="empty_unique_monsters">Explore the vast world of Xenoblade to find and slay all unique monsters !</string>
+    <string name="action_level">Your level</string>
+    <string name="input_party_level">Enter your party\'s level</string>
+    <string name="validate">Validate</string>
+    <string name="cancel">Cancel</string>
+    <string name="hint_unique_name">Monster\'s unique name</string>
+    <string name="hint_level">Level</string>
+    <string name="hint_kind">Kind</string>
+    <string name="action_sort">Sorting</string>
+    <string name="sorting_by_name">By name</string>
+    <string name="sorting_by_level">By level</string>
+    <string name="action_save">Save</string>
+    <string name="hint_area">Approximate location in this area</string>
+    <string name="hint_zone">Encounter zone</string>
+    <string name="action_delete">Delete</string>
 
 </resources>

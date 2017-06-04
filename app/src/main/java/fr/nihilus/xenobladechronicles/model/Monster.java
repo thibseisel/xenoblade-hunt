@@ -1,4 +1,4 @@
-package fr.nihilus.xenobladechronicles.monsters;
+package fr.nihilus.xenobladechronicles.model;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -7,27 +7,32 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.IntDef;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Comparator;
 
 @Entity(tableName = "monster", indices = @Index("name"))
-public class Monster {
+public class Monster implements Comparable<Monster> {
 
-    static final int LEVEL_DANGER = 5;
-    static final int LEVEL_STRONG = 4;
-    static final int LEVEL_EQUAL = 3;
-    static final int LEVEL_WEAK = 2;
-    static final int LEVEL_EASY = 1;
-    static final int LEVEL_DEFEATED = 0;
+    public static final int LEVEL_DANGER = 5;
+    public static final int LEVEL_STRONG = 4;
+    public static final int LEVEL_EQUAL = 3;
+    public static final int LEVEL_WEAK = 2;
+    public static final int LEVEL_EASY = 1;
+    public static final int LEVEL_DEFEATED = 0;
+
+    public static final int ORDERING_NAME = 0;
+    public static final int ORDERING_LEVEL = 1;
 
     @PrimaryKey(autoGenerate = true)
     private Long id;
     private int level = 5;
     private String name = "";
 
-    @ColumnInfo(name = "area_code", typeAffinity = ColumnInfo.INTEGER)
-    private Area area = Area.NONE;
+    @ColumnInfo(name = "area_code", typeAffinity = ColumnInfo.TEXT)
+    private Area area;
     private String location;
     private String kind;
 
@@ -41,7 +46,7 @@ public class Monster {
      * @return constante définissant le niveau de danger représenté par ce monstre
      */
     @DangerLevel
-    int getDangerLevel(int playerLevel) {
+    public int getDangerLevel(int playerLevel) {
         if (isDefeated) return LEVEL_DEFEATED;
         else {
             int levelDiff = level - playerLevel;
@@ -78,6 +83,8 @@ public class Monster {
     }
 
     public void setLevel(@IntRange(from = 5, to = 120) int level) {
+        if (level < 5 || level > 120)
+            throw new IllegalArgumentException("Level must be in 5..120");
         this.level = level;
     }
 
@@ -101,7 +108,7 @@ public class Monster {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(@Nullable String location) {
         this.location = location;
     }
 
@@ -109,7 +116,7 @@ public class Monster {
         return kind;
     }
 
-    public void setKind(String kind) {
+    public void setKind(@Nullable String kind) {
         this.kind = kind;
     }
 
@@ -121,8 +128,39 @@ public class Monster {
         isDefeated = defeated;
     }
 
+    @Override
+    public int compareTo(@NonNull Monster o) {
+        return ORDER_BY_NAME.compare(this, o);
+    }
+
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({LEVEL_DEFEATED, LEVEL_EASY, LEVEL_WEAK, LEVEL_EQUAL, LEVEL_STRONG, LEVEL_DANGER})
-    @interface DangerLevel {
+    public @interface DangerLevel {}
+
+    @Retention(RetentionPolicy.SOURCE)
+    @IntDef({ORDERING_NAME, ORDERING_LEVEL})
+    public @interface Ordering {}
+
+    private static final Comparator<Monster> ORDER_BY_NAME = new Comparator<Monster>() {
+        @Override public int compare(Monster m1, Monster m2) {
+            return m1.name.compareTo(m2.name);
+        }
+    };
+
+    private static final Comparator<Monster> ORDER_BY_LEVEL = new Comparator<Monster>() {
+        @Override public int compare(Monster m1, Monster m2) {
+            return m1.level - m2.level;
+        }
+    };
+
+    public static Comparator<Monster> comparator(@Ordering int orderStrategy) {
+        switch (orderStrategy) {
+            case ORDERING_NAME:
+                return ORDER_BY_NAME;
+            case ORDERING_LEVEL:
+                return ORDER_BY_LEVEL;
+            default:
+                throw new IllegalArgumentException("Unhandled ordering");
+        }
     }
 }

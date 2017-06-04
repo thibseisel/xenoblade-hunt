@@ -3,6 +3,9 @@ package fr.nihilus.xenobladechronicles.monsters;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.nihilus.xenobladechronicles.model.Area;
+import fr.nihilus.xenobladechronicles.model.Monster;
+
 import static org.junit.Assert.assertEquals;
 
 public class MonsterTest {

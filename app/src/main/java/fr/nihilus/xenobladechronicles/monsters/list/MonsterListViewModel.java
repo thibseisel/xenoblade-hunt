@@ -1,17 +1,21 @@
-package fr.nihilus.xenobladechronicles.monsters;
+package fr.nihilus.xenobladechronicles.monsters.list;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
 import javax.inject.Inject;
 
-class MonstersViewModel extends ViewModel {
+import fr.nihilus.xenobladechronicles.model.Monster;
+import fr.nihilus.xenobladechronicles.monsters.MonsterRepository;
+
+public class MonsterListViewModel extends ViewModel {
+
     private final MonsterRepository mRepository;
     private LiveData<Monster[]> mAllMonsters;
 
     @Inject
-    MonstersViewModel(MonsterRepository monsterRepo) {
-        mRepository = monsterRepo;
+    MonsterListViewModel(MonsterRepository repo) {
+        mRepository = repo;
     }
 
     void init() {
@@ -25,5 +29,9 @@ class MonstersViewModel extends ViewModel {
     void markAsDefeated(Monster defeatedMonster) {
         defeatedMonster.setDefeated(true);
         mRepository.update(defeatedMonster);
+    }
+
+    void delete(Monster monsterToDelete) {
+        mRepository.delete(monsterToDelete);
     }
 }

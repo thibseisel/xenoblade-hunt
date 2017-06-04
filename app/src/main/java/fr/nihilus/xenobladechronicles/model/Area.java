@@ -1,4 +1,4 @@
-package fr.nihilus.xenobladechronicles.monsters;
+package fr.nihilus.xenobladechronicles.model;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -24,8 +24,7 @@ public enum Area {
     MECHONIS_FIELD(R.string.area_mechonis_field),
     CENTRAL_FACTORY(R.string.area_central_factory),
     AGNIRATHA(R.string.area_agniratha),
-    PRISON_ISLAND(R.string.area_prison_island),
-    NONE(R.string.area_none);
+    PRISON_ISLAND(R.string.area_prison_island);
 
     final @StringRes int nameId;
 
@@ -33,7 +32,7 @@ public enum Area {
         nameId = areaNameId;
     }
 
-    String getName(@NonNull Context context) {
+    public String getName(@NonNull Context context) {
         return context.getString(nameId);
     }
 }
