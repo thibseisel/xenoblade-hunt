@@ -14,12 +14,10 @@
                 <item
                     android:id="@+id/sorting_alpha"
                     android:title="@string/sorting_by_name"
-                    android:checkable="true"
                     android:checked="true"/>
                 <item
                     android:id="@+id/sorting_level"
-                    android:title="@string/sorting_by_level"
-                    android:checkable="true"/>
+                    android:title="@string/sorting_by_level"/>
             </group>
         </menu>
     </item>

@@ -90,11 +90,17 @@ public class MonsterListFragment extends RecyclerFragment
                 return true;
 
             case R.id.sorting_alpha:
-                applySorting(Monster.ORDERING_NAME);
+                if (!item.isChecked()) {
+                    applySorting(Monster.ORDERING_NAME);
+                    item.setChecked(true);
+                }
                 return true;
 
             case R.id.sorting_level:
-                applySorting(Monster.ORDERING_LEVEL);
+                if (!item.isChecked()) {
+                    applySorting(Monster.ORDERING_LEVEL);
+                    item.setChecked(true);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
