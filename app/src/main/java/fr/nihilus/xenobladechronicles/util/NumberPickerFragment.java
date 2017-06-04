@@ -67,9 +67,9 @@ public class NumberPickerFragment extends AppCompatDialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         NumberPicker picker = new NumberPicker(getContext());
-        picker.setValue(mValue);
         picker.setMinValue(mMin);
         picker.setMaxValue(mMax);
+        picker.setValue(mValue);
         picker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
             @Override
             public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
