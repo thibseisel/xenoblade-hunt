@@ -12,12 +12,14 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/sorting_level"
+                    android:title="@string/sorting_by_level"
+                    android:checked="true"
+                    android:orderInCategory="1"/>
+                <item
                     android:id="@+id/sorting_alpha"
                     android:title="@string/sorting_by_name"
-                    android:checked="true"/>
-                <item
-                    android:id="@+id/sorting_level"
-                    android:title="@string/sorting_by_level"/>
+                    android:orderInCategory="2"/>
             </group>
         </menu>
     </item>

@@ -22,7 +22,7 @@ class MonsterAdapter extends Adapter<MonsterAdapter.Holder> {
     private final MonsterActionListener mListener;
     private int mPlayerLevel;
     private Monster[] mData = new Monster[0];
-    private Comparator<Monster> mSortingRule = Monster.comparator(Monster.ORDERING_NAME);
+    private Comparator<Monster> mSortingRule = Monster.comparator(Monster.ORDERING_LEVEL);
 
     MonsterAdapter(@IntRange(from = 1, to = 99) int playerLevel,
                    MonsterActionListener listener) {

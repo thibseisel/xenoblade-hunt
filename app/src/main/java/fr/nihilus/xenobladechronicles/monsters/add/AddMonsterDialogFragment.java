@@ -12,13 +12,18 @@ import android.support.v7.app.AppCompatDialogFragment;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import java.util.Arrays;
 
 import javax.inject.Inject;
 
@@ -115,9 +120,17 @@ public class AddMonsterDialogFragment extends AppCompatDialogFragment implements
             @Override
             public void onChanged(@Nullable String[] suggestions) {
                 kindAdapter.clear();
-                kindAdapter.addAll(suggestions);
+                if (suggestions != null) {
+                    Log.d(TAG, "onChanged: suggestions : " + Arrays.toString(suggestions));
+                    kindAdapter.addAll(suggestions);
+                }
             }
         });
+
+        Window window = getDialog().getWindow();
+        if (window != null) {
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
     }
 
     private String[] getZoneNames() {
@@ -133,7 +146,7 @@ public class AddMonsterDialogFragment extends AppCompatDialogFragment implements
         Editable level = mInputLevel.getText();
         Editable name = mInputName.getText();
         Editable kind = mInputKind.getText();
-        // TODO Récupérer la zone
+        Area encounterArea = Area.values()[mSpinnerZone.getSelectedItemPosition()];
         Editable location = mInputLocation.getText();
 
         if (TextUtils.isEmpty(level)) {
@@ -145,7 +158,7 @@ public class AddMonsterDialogFragment extends AppCompatDialogFragment implements
         }
 
         int intLevel = Integer.parseInt(level.toString());
-        mViewModel.addMonster(intLevel, name.toString(), Area.COLONY_9,
+        mViewModel.addMonster(intLevel, name.toString(), encounterArea,
                 kind == null ? null : kind.toString(),
                 location == null ? null : location.toString()
         );
@@ -154,6 +167,7 @@ public class AddMonsterDialogFragment extends AppCompatDialogFragment implements
     }
 
     private void onKindTextChanged(String input) {
+        Log.d(TAG, "onKindTextChanged: recherche de suggestions pour : " + input);
         mViewModel.setKindQuery(input);
     }
 

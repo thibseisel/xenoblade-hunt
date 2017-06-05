@@ -13,7 +13,7 @@ import fr.nihilus.xenobladechronicles.model.Monster;
 @Dao
 public interface MonsterDao {
 
-    @Query("SELECT * FROM monster ORDER BY name")
+    @Query("SELECT * FROM monster ORDER BY level")
     LiveData<Monster[]> getAll();
 
     @Query("SELECT * FROM monster WHERE name LIKE :searchedName")
