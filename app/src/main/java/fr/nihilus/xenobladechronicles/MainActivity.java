@@ -2,6 +2,8 @@ package fr.nihilus.xenobladechronicles;
 
 import android.arch.lifecycle.LifecycleRegistry;
 import android.arch.lifecycle.LifecycleRegistryOwner;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity
 
     private final LifecycleRegistry mRegistry = new LifecycleRegistry(this);
     @Inject DispatchingAndroidInjector<Fragment> dispatchingFragmentInjector;
+    @Inject SharedPreferences mPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,11 @@ public class MainActivity extends AppCompatActivity
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (!mPrefs.getBoolean("hasInit", false)) {
+            startService(new Intent(this, DatabaseSetupService.class));
+            mPrefs.edit().putBoolean("hasInit", true).apply();
+        }
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

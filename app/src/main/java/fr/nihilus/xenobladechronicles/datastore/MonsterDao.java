@@ -23,7 +23,7 @@ public interface MonsterDao {
     LiveData<String[]> searchKinds(String search);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Long insert(Monster monster);
+    void insert(Monster... monster);
 
     @Update
     void update(Monster monster);
