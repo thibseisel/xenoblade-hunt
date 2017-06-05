@@ -12,12 +12,12 @@
     </item>
     <item android:maxLevel="2">
         <shape android:shape="oval">
-            <solid android:color="@color/md_grey_400"/>
+            <solid android:color="@color/md_blue_500"/>
         </shape>
     </item>
     <item android:maxLevel="3">
         <shape android:shape="oval">
-            <solid android:color="@color/md_amber_500"/>
+            <solid android:color="@color/md_grey_400"/>
         </shape>
     </item>
     <item android:maxLevel="4">
