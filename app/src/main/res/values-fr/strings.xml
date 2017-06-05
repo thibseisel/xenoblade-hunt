@@ -36,4 +36,5 @@
     <string name="hint_area">Localisation approximative dans cette zone</string>
     <string name="hint_zone">Zone de rencontre</string>
     <string name="action_delete">Supprimer</string>
+    <string name="area_ether_mine">Mine principale</string>
 </resources>

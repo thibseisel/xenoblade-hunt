@@ -11,6 +11,7 @@ public enum Area {
     TEPHRA_CAVES(R.string.area_tephra_cave),
     BIONIS_LEG(R.string.area_bionis_leg),
     COLONY_6(R.string.area_colony_6),
+    ETHER_MINE(R.string.area_ether_mine),
     SATORL_MARSH(R.string.area_satorl_marsh),
     BIONIS_INTERIOR(R.string.area_bionis_interior),
     MAKNA_FOREST(R.string.area_makna_forest),
