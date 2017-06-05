@@ -40,25 +40,33 @@ class MonsterAdapter extends Adapter<MonsterAdapter.Holder> {
     @Override
     public void onBindViewHolder(final Holder holder, int position) {
         Context ctx = holder.itemView.getContext();
-        Monster monster = mData[position];
+        final Monster monster = mData[position];
 
         holder.levelIndicator.setText(String.valueOf(monster.getLevel()));
-        holder.levelIndicator.getBackground().setLevel(monster.getDangerLevel(mPlayerLevel));
+        int dangerLevel = monster.getDangerLevel(mPlayerLevel);
+        holder.levelIndicator.getBackground().setLevel(dangerLevel);
 
         holder.name.setText(monster.getName());
         holder.location.setText(monster.getArea().getName(ctx));
+
+        holder.defeatedButton.setVisibility(monster.isDefeated() ? View.GONE : View.VISIBLE);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    final Monster selected = mData[holder.getAdapterPosition()];
+                    Monster selected = mData[holder.getAdapterPosition()];
+                    mListener.onMonsterSelected(selected);
+                }
+            }
+        });
 
-                    if (R.id.btn_defeated == v.getId()) {
-                        mListener.onMonsterDefeated(selected);
-                    } else {
-                        mListener.onMonsterSelected(selected);
-                    }
+        holder.defeatedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    Monster defeated = mData[holder.getAdapterPosition()];
+                    mListener.onMonsterDefeated(defeated);
                 }
             }
         });
@@ -98,6 +106,7 @@ class MonsterAdapter extends Adapter<MonsterAdapter.Holder> {
 
     interface MonsterActionListener {
         void onMonsterSelected(@NonNull Monster monster);
+
         void onMonsterDefeated(@NonNull Monster monster);
     }
 
