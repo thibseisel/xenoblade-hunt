@@ -129,12 +129,11 @@ public class MonsterListFragment extends RecyclerFragment
 
     @Override
     public void onMonsterSelected(@NonNull Monster monster) {
-        Toast.makeText(getContext(), "Selected: " + monster.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), monster.getLocation(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onMonsterDefeated(@NonNull Monster monster) {
-        Toast.makeText(getContext(), "Vaincu: " + monster.getName(), Toast.LENGTH_LONG).show();
         mViewModel.markAsDefeated(monster);
     }
 

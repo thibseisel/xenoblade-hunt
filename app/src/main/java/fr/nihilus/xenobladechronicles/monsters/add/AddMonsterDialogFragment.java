@@ -59,6 +59,35 @@ public class AddMonsterDialogFragment extends AppCompatDialogFragment implements
                 .get(AddMonsterViewModel.class);
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        ArrayAdapter<String> zoneAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_dropdown_item, getZoneNames());
+        mSpinnerZone.setAdapter(zoneAdapter);
+
+        final ArrayAdapter<String> kindAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_dropdown_item_1line);
+        mInputKind.setAdapter(kindAdapter);
+
+        mViewModel.getKinds().observe(this, new Observer<String[]>() {
+            @Override
+            public void onChanged(@Nullable String[] suggestions) {
+                kindAdapter.clear();
+                if (suggestions != null) {
+                    Log.d(TAG, "onChanged: suggestions : " + Arrays.toString(suggestions));
+                    kindAdapter.addAll(suggestions);
+                }
+            }
+        });
+
+        Window window = getDialog().getWindow();
+        if (window != null) {
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        }
+    }
+
     @NonNull
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -104,35 +133,6 @@ public class AddMonsterDialogFragment extends AppCompatDialogFragment implements
         });
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        ArrayAdapter<String> zoneAdapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_dropdown_item, getZoneNames());
-        mSpinnerZone.setAdapter(zoneAdapter);
-
-        final ArrayAdapter<String> kindAdapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_dropdown_item_1line);
-        mInputKind.setAdapter(kindAdapter);
-
-        mViewModel.getKinds().observe(this, new Observer<String[]>() {
-            @Override
-            public void onChanged(@Nullable String[] suggestions) {
-                kindAdapter.clear();
-                if (suggestions != null) {
-                    Log.d(TAG, "onChanged: suggestions : " + Arrays.toString(suggestions));
-                    kindAdapter.addAll(suggestions);
-                }
-            }
-        });
-
-        Window window = getDialog().getWindow();
-        if (window != null) {
-            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        }
-    }
-
     private String[] getZoneNames() {
         Area[] areas = Area.values();
         String[] zones = new String[areas.length];
@@ -159,8 +159,8 @@ public class AddMonsterDialogFragment extends AppCompatDialogFragment implements
 
         int intLevel = Integer.parseInt(level.toString());
         mViewModel.addMonster(intLevel, name.toString(), encounterArea,
-                kind == null ? null : kind.toString(),
-                location == null ? null : location.toString()
+                location == null ? null : location.toString(),
+                kind == null ? null : kind.toString()
         );
 
         dismiss();
