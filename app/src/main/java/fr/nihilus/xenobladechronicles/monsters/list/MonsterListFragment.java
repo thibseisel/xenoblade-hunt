@@ -52,7 +52,6 @@ public class MonsterListFragment extends RecyclerFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        setLayoutManager(new LinearLayoutManager(getContext()));
         mViewModel = ViewModelProviders.of(this, mViewModelFactory).get(MonsterListViewModel.class);
         mViewModel.init();
     }
@@ -60,6 +59,10 @@ public class MonsterListFragment extends RecyclerFragment
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new MonsterAdapter(UserPrefs.getUserLevel(mPrefs), this);
+        setAdapter(mAdapter);
 
         mViewModel.getMonsters().observe(this, new Observer<Monster[]>() {
             @Override
@@ -69,9 +72,6 @@ public class MonsterListFragment extends RecyclerFragment
                 }
             }
         });
-
-        mAdapter = new MonsterAdapter(UserPrefs.getUserLevel(mPrefs), this);
-        setAdapter(mAdapter);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class MonsterListFragment extends RecyclerFragment
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         view.findViewById(R.id.btn_add).setOnClickListener(new View.OnClickListener() {

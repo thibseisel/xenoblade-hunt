@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -13,9 +13,9 @@ buildscript {
 }
 
 ext {
-    arch_version = '1.0.0-alpha1'
-    support_version = '25.3.1'
-    dagger_version = '2.11-rc2'
+    arch_version = '1.0.0-alpha5'
+    support_version = '25.4.0'
+    dagger_version = '2.11'
     junit_version = '4.12'
 }
 
@@ -23,7 +23,6 @@ allprojects {
     repositories {
         jcenter()
         maven { url 'https://maven.google.com' }
-        mavenLocal()
     }
 }
 
