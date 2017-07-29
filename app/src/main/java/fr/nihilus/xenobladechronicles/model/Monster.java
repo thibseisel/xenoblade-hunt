@@ -25,6 +25,7 @@ public class Monster implements Comparable<Monster> {
 
     public static final int ORDERING_NAME = 0;
     public static final int ORDERING_LEVEL = 1;
+    public static final int ORDERING_AREA = 2;
 
     @PrimaryKey(autoGenerate = true)
     private Long id;
@@ -138,7 +139,7 @@ public class Monster implements Comparable<Monster> {
     public @interface DangerLevel {}
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({ORDERING_NAME, ORDERING_LEVEL})
+    @IntDef({ORDERING_NAME, ORDERING_LEVEL, ORDERING_AREA})
     public @interface Ordering {}
 
     private static final Comparator<Monster> ORDER_BY_NAME = new Comparator<Monster>() {
@@ -153,12 +154,23 @@ public class Monster implements Comparable<Monster> {
         }
     };
 
+    private static final Comparator<Monster> ORDER_BY_AREA = new Comparator<Monster>() {
+        @Override
+        public int compare(Monster m1, Monster m2) {
+            int areaDiff = 100 * m1.area.compareTo(m2.area);
+            int levelDiff = ORDER_BY_LEVEL.compare(m1, m2);
+            return areaDiff + levelDiff;
+        }
+    };
+
     public static Comparator<Monster> comparator(@Ordering int orderStrategy) {
         switch (orderStrategy) {
             case ORDERING_NAME:
                 return ORDER_BY_NAME;
             case ORDERING_LEVEL:
                 return ORDER_BY_LEVEL;
+            case ORDERING_AREA:
+                return ORDER_BY_AREA;
             default:
                 throw new IllegalArgumentException("Unhandled ordering");
         }

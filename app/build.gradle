@@ -50,4 +50,5 @@ dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
 
     testCompile "junit:junit:$junit_version"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
 }

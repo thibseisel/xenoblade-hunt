@@ -3,10 +3,16 @@ package fr.nihilus.xenobladechronicles.monsters;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+
 import fr.nihilus.xenobladechronicles.model.Area;
 import fr.nihilus.xenobladechronicles.model.Monster;
 
+import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class MonsterTest {
 
@@ -47,6 +53,30 @@ public class MonsterTest {
         assertDangerIs(Monster.LEVEL_DEFEATED, 42);
         assertDangerIs(Monster.LEVEL_DEFEATED, 45);
         assertDangerIs(Monster.LEVEL_DEFEATED, 50);
+    }
+
+    @Test
+    public void ordering_Area() throws Exception {
+        ArrayList<Monster> monsters = new ArrayList<>(3);
+        Monster m1 = new Monster();
+        m1.setArea(Area.FALLEN_ARM);
+        m1.setLevel(58);
+        monsters.add(m1);
+
+        Monster m2 = new Monster();
+        m2.setArea(Area.BIONIS_LEG);
+        m2.setLevel(90);
+        monsters.add(m2);
+
+        Monster m3 = new Monster();
+        m3.setArea(Area.BIONIS_LEG);
+        m3.setLevel(16);
+        monsters.add(m3);
+
+        Comparator<Monster> areaComparator = Monster.comparator(Monster.ORDERING_AREA);
+        Collections.sort(monsters, areaComparator);
+
+        assertThat(monsters, contains(m3, m2, m1));
     }
 
     private void assertDangerIs(@Monster.DangerLevel int level, int playerLevel) {

@@ -98,7 +98,6 @@ class MonsterAdapter extends Adapter<MonsterAdapter.Holder> {
     }
 
     void setMonsters(@NonNull Monster[] data) {
-        // FIXME: l'adapter ne prend pas en compte le chargement initial parfois
         mData = new Monster[data.length];
         System.arraycopy(data, 0, mData, 0, data.length);
         Arrays.sort(mData, mSortingRule);

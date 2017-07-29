@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +35,8 @@ import fr.nihilus.xenobladechronicles.viewmodel.ViewModelFactory;
 public class MonsterListFragment extends RecyclerFragment
         implements LifecycleRegistryOwner, MonsterAdapter.MonsterActionListener,
         NumberPickerFragment.ValueCallback {
+
+    private static final String TAG = "MonsterListFragment";
 
     private final LifecycleRegistry mRegistry = new LifecycleRegistry(this);
     @Inject SharedPreferences mPrefs;
@@ -81,6 +84,8 @@ public class MonsterListFragment extends RecyclerFragment
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "onOptionsItemSelected() called with: item = [" + item + "]");
+        Log.d(TAG, "onOptionsItemSelected() called with: item = [" + item.getItemId() + "]");
         switch (item.getItemId()) {
             case R.id.action_level:
                 int partyLevel = UserPrefs.getUserLevel(mPrefs);
@@ -90,6 +95,7 @@ public class MonsterListFragment extends RecyclerFragment
                 return true;
 
             case R.id.sorting_alpha:
+                // FIXME Inversé avec sorting_level, et je comprends pas du tout pourquoi
                 if (!item.isChecked()) {
                     applySorting(Monster.ORDERING_NAME);
                     item.setChecked(true);
@@ -99,6 +105,12 @@ public class MonsterListFragment extends RecyclerFragment
             case R.id.sorting_level:
                 if (!item.isChecked()) {
                     applySorting(Monster.ORDERING_LEVEL);
+                    item.setChecked(true);
+                }
+                return true;
+            case R.id.sorting_area:
+                if (!item.isChecked()) {
+                    applySorting(Monster.ORDERING_AREA);
                     item.setChecked(true);
                 }
                 return true;
@@ -159,6 +171,7 @@ public class MonsterListFragment extends RecyclerFragment
     }
 
     private void applySorting(@Monster.Ordering int orderStrategy) {
+        Log.d(TAG, "applySorting() called with: orderStrategy = [" + orderStrategy + "]");
         mAdapter.setSorting(orderStrategy);
     }
 }

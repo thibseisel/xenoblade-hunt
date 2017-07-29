@@ -20,6 +20,11 @@
                     android:id="@+id/sorting_alpha"
                     android:title="@string/sorting_by_name"
                     android:orderInCategory="2"/>
+
+                <item
+                    android:id="@+id/sorting_area"
+                    android:title="@string/sorting_by_area"
+                    android:orderInCategory="3"/>
             </group>
         </menu>
     </item>

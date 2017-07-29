@@ -36,5 +36,6 @@
     <string name="hint_zone">Encounter zone</string>
     <string name="action_delete">Delete</string>
     <string name="area_ether_mine">Ether mine</string>
+    <string name="sorting_by_area">By area</string>
 
 </resources>
