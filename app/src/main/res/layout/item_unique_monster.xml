@@ -33,8 +33,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@id/level_indicator"
-        android:layout_toLeftOf="@+id/btn_defeated"
-        android:layout_toRightOf="@id/level_indicator"
         android:layout_toStartOf="@+id/btn_defeated"
         android:orientation="vertical">
 
@@ -64,9 +62,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="?selectableItemBackgroundBorderless"
+        android:focusable="true"
         android:clickable="true"
         android:contentDescription="@string/desc_mark_defeated"
         android:duplicateParentState="false"

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/XenobladeChronicles.iml" filepath="$PROJECT_DIR$/XenobladeChronicles.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/xenoblade-hunt.iml" filepath="$PROJECT_DIR$/.idea/modules/xenoblade-hunt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/xenoblade-hunt.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/xenoblade-hunt.app.iml" />
     </modules>
   </component>
 </project>
