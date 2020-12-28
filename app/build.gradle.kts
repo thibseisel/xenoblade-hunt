@@ -54,35 +54,31 @@ android {
 }
 
 dependencies {
-    val androidx_room = "2.2.6"
-    val androidx_lifecycle = "2.2.0"
-    val dagger = "2.30.1"
+    implementation(KotlinX.coroutines.core)
+    implementation(KotlinX.coroutines.android)
 
-    val coroutines = "1.4.2"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines")
+    implementation(AndroidX.appCompat)
+    implementation(AndroidX.fragmentKtx)
+    implementation(AndroidX.recyclerView)
+    implementation(AndroidX.cardView)
+    implementation(AndroidX.preferenceKtx)
 
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.fragment:fragment-ktx:1.2.5")
-    implementation("com.google.android.material:material:1.2.1")
-    implementation("androidx.recyclerview:recyclerview:1.1.0")
-    implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.preference:preference-ktx:1.1.1")
+    implementation(Google.android.material)
 
-    implementation("androidx.room:room-ktx:$androidx_room")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$androidx_lifecycle")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$androidx_lifecycle")
+    implementation(AndroidX.room.ktx)
+    kapt(AndroidX.room.compiler)
 
-    implementation("com.google.dagger:dagger:$dagger")
-    implementation("com.google.dagger:dagger-android:$dagger")
-    implementation("com.google.dagger:dagger-android-support:$dagger")
+    implementation(AndroidX.lifecycle.viewModelKtx)
+    implementation(AndroidX.lifecycle.liveDataKtx)
 
-    kapt("com.google.dagger:dagger-android-processor:$dagger")
-    kapt("com.google.dagger:dagger-compiler:$dagger")
-    kapt("androidx.room:room-compiler:$androidx_room")
+    implementation(Google.dagger)
+    kapt(Google.dagger.compiler)
+    implementation(Google.dagger.android)
+    implementation(Google.dagger.android.support)
+    kapt(Google.dagger.android.processor)
 
-    testImplementation("junit:junit:4.13.1")
-    testImplementation("org.hamcrest:hamcrest-all:1.3")
+    testImplementation(Testing.junit4)
+    testImplementation("org.hamcrest:hamcrest-all:_")
 
-    androidTestImplementation("android.room:room-testing:$androidx_room")
+    androidTestImplementation(AndroidX.room.testing)
 }
